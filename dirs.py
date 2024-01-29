@@ -14,6 +14,7 @@ def main():
 def getwd():
     #pwd = os.getcwd()
     #pwd = os.path.realpath(__file__)
+    os.getcwd()
     click.echo(f"The current working directory is , {os.getcwd()}")
 
 @main.command()
@@ -29,6 +30,7 @@ def setwd(dpath):
      if not Path(dpath).exists(): #pathlib.PureWindowsPath(dpath).as_posix()
          try:
             new_path = os.makedirs(dpath, exist_ok= True)
+            new_path
             click.echo(os.chdir( str(new_path)) )
          except FileNotFoundError:
              click.echo(f"Directory: {dpath} does not exist but will be created if possible")
@@ -43,6 +45,7 @@ def setwd(dpath):
 
      else:
          try:
+             os.chdir(str(dpath))
              click.echo(os.chdir(str(dpath)))
          except FileNotFoundError:
              click.echo(f"Directory: {dpath} does not exist")
