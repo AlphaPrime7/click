@@ -1,5 +1,6 @@
 #check context for
 # Run as so  python adv_ctx.py README.md check_context_object
+#requests and configure modules needed.
 
 #COMMAND GROUP 1-JSON
 import pprint
@@ -111,9 +112,9 @@ def get_text(_dict, sentences, paragraphs, download):
 
 
 #COMMAND GROUP 2 -MP3
-import requests
+import requests #py -m pip install requests
 from time import sleep
-from configure import auth_key
+from configure import auth_key #py -m pip install configure
 import json
 import sys
  
