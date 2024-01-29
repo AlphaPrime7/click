@@ -48,15 +48,27 @@ class CustomCommandClass(Command):
         pass
 
     def run(nofun):
-        
-        if nofun.target_dir is None:
-            def getwd():
-                os.getcwd()
-                click.echo(f"The current working directory is , {os.getcwd()}")
-            getwd()
 
-        else:
-            def setwd(target_dir):
+        @click.group()
+        def main():
+            pass
+        
+        @main.command()
+        def getwd():
+            os.getcwd()
+            click.echo(f"The current working directory is , {os.getcwd()}")
+        getwd()
+
+        @main.command()
+        @click.argument('target_dir',
+                        type=click.Path(
+                            exists=False,
+                            file_okay=False,
+                            readable=True,
+                            path_type=Path),
+                            )
+
+        def setwd(target_dir):
                  dpath = pathlib.PureWindowsPath(target_dir).as_posix()
                  if not Path(dpath).exists(): #pathlib.PureWindowsPath(dpath).as_posix()
                      try:
@@ -88,9 +100,7 @@ class CustomCommandClass(Command):
                          click.echo(f"You do not have permissions to change to {dpath}")
                          raise SystemExit(0)
                      click.echo()
-            setwd()
-
-        
+        setwd()
 
 
 setup(
